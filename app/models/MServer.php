@@ -339,7 +339,8 @@ class MServer {
 		//auth by mongo
 		if ($this->_mongoAuth) {
 			// "authenticate" can only be used between 1.0.1 - 1.2.11
-			if (RMongo::compareVersion("1.0.1") >= 0 && RMongo::compareVersion("1.2.11") < 0) {
+			// php5-mongo (MongoClient) 1.6.x is ok, so remove upper bound for me @shtzeng 
+			if (RMongo::compareVersion("1.0.1") >= 0) {
 				$dbs = $db;
 				if (!is_array($dbs)) {
 					$dbs = preg_split("/\\s*,\\s*/", $dbs);
@@ -361,7 +362,7 @@ class MServer {
 			//authenticate
 			if (!empty($this->_mongoUser)) {
 				// "authenticate" can only be used between 1.0.1 - 1.2.11
-				if (RMongo::compareVersion("1.0.1") >= 0 && RMongo::compareVersion("1.2.11") < 0) {
+				if (RMongo::compareVersion("1.0.1") >= 0) {
 					return $this->_mongo
 						->selectDB($db)
 						->authenticate($this->_mongoUser, $this->_mongoPass);
@@ -372,7 +373,7 @@ class MServer {
 			//authenticate
 			if (!empty($this->_mongoUser)) {
 				// "authenticate" can only be used between 1.0.1 - 1.2.11
-				if (RMongo::compareVersion("1.0.1") >= 0 && RMongo::compareVersion("1.2.11") < 0) {
+				if (RMongo::compareVersion("1.0.1") >= 0) {
 					return $this->_mongo
 						->selectDB($db)
 						->authenticate($this->_mongoUser, $this->_mongoPass);
